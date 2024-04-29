@@ -1,0 +1,32 @@
+{
+    "challenges": [
+        {
+            "challengeId": "2",
+            "title": "Ropes HIIT",
+            "description": "High intensity interval training (HIIT) on rope swings",
+            "alt":"Ropes Picture",
+            "url": "./images/hiit.png"
+        },
+        {
+            "challengeId": "3",
+            "title": "Kettlebell Swings",
+            "description": "Get a full body workout with this kettlebell fitness challenge",
+            "alt":"Kettlebell Picture",
+            "url": "./images/kettlebell.png"
+        },
+        {
+            "challengeId": "1",
+            "title": "Grace Challenge",
+            "description": "30 Clean and Jerk reps to be completed as fast as possible",
+            "alt":"Lifting Picture",
+            "url": "./images/grace.png"
+        },
+        {
+          "challengeId": "4",
+          "title": "Weighted Plank",
+          "description": "Your abs will be burning after completing this weighted plank challenge",
+          "alt":"Plank Picture",
+          "url": "./images/plank.png"
+        }
+    ]
+  }

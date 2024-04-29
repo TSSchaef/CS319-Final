@@ -1,0 +1,33 @@
+{
+    "profile": {
+        "name": "Tyler",
+        "age": 20,
+        "joined": "03/03/2024",
+        "bio": "Hi! I'm Tyler and I'm interested in fitness and computers",
+        "url": "./images/profile.png"
+    },
+    "challenges": [
+        {
+            "challengeId": "2",
+            "title": "Ropes HIIT",
+            "description": "High intensity interval training (HIIT) on rope swings",
+            "alt":"Ropes Picture",
+            "url": "./images/hiit.png"
+        },
+        {
+            "challengeId": "3",
+            "title": "Kettlebell Swings",
+            "description": "Get a full body workout with this kettlebell fitness challenge",
+            "alt":"Kettlebell Picture",
+            "url": "./images/kettlebell.png"
+        }
+    ],
+    "achievements": [
+        {
+            "achievementId": "1",
+            "title": "First \"User\"",
+            "description": "OG Founder and Creator",
+            "url": "./images/trophy.png"
+        }
+    ]
+  }
