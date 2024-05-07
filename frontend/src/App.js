@@ -18,13 +18,16 @@ import {
 } from "react-router-dom";
 import default_user from '../src/otherimages/default_user.png';
 
-var user = {};
 
 const App = () => {
 
     const NavBar = () => {
         const navigate = useNavigate();
-        if(!user) navigate("/");  
+        let user = JSON.parse(localStorage.getItem("User"));
+        if(!user || user == "null"){
+            navigate("/");  
+            return ``;
+        }
 
         return (
             <nav className="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
@@ -36,7 +39,10 @@ const App = () => {
             </a>
             <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
             <li><a className="dropdown-item" href="/profile">Profile</a></li>
-            <li><a className="dropdown-item" href="/">Sign out</a></li>
+            <li><button className="dropdown-item" onClick={() => {
+                localStorage.clear();
+                navigate("/");
+            }}>Sign out</button></li>
             </ul>
             </div>
 
@@ -115,7 +121,7 @@ const App = () => {
                     if(data.id === "failure"){
                         //invalid login
                     } else {
-                        user = data;
+                        localStorage.setItem("User", JSON.stringify(data));
                         navigate("/browse");
                     }
             });
