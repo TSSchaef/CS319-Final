@@ -13,50 +13,58 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  useNavigate,
   useParams
 } from "react-router-dom";
 import default_user from '../src/otherimages/default_user.png';
 
+var user = {};
+
 const App = () => {
-  const navBar = (
-    <nav className="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
-      <div className="container-fluid">
-        <div className="dropdown">
-          <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+
+    const NavBar = () => {
+        const navigate = useNavigate();
+        if(!user) navigate("/");  
+
+        return (
+            <nav className="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
+            <div className="container-fluid">
+            <div className="dropdown">
+            <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src={default_user} alt="" width="32" height="32" className="rounded-circle me-2"/>
-            <strong>Username</strong>
-          </a>
-          <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
+            <strong>{user.name} </strong>
+            </a>
+            <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
             <li><a className="dropdown-item" href="/profile">Profile</a></li>
             <li><a className="dropdown-item" href="/">Sign out</a></li>
-          </ul>
-        </div>
+            </ul>
+            </div>
 
-        <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
-          <div className="offcanvas-header">
+            <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
+            <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasNavbarDarkLabel">Challenge Champs</h5>
             <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div className="offcanvas-body">
+            </div>
+            <div className="offcanvas-body">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li className="nav-item">
-                <a className="nav-link" href="/browse">Browse</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/challenge/2">Example Challenge</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/info">About Us</a>
-              </li>
+            <li className="nav-item">
+            <a className="nav-link" href="/browse">Browse</a>
+            </li>
+            <li className="nav-item">
+            <a className="nav-link" href="/challenge/2">Example Challenge</a>
+            </li>
+            <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="/info">About Us</a>
+            </li>
             </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
+            </div>
+            </div>
+            </div>
+            </nav>
+        )};
 
   const footer = (
     <footer className="container py-5">
@@ -70,26 +78,83 @@ const App = () => {
     </footer>
   );
 
+    const SignUp = () => {
+        const navigate = useNavigate();
 
-    const SignIn = () => {
-        
         return (
-            <div>
+            <div className="text-center d-flex align-items-center justify-content-center">
+            <div className="box w-25 h-50">
             <form className="form-signin">
-            <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label htmlFor="inputEmail" className="sr-only">Email address</label>
+            <h1 className="h3 mb-3 font-weight-normal">Challenge Champs Sign-up</h1>
+            <input type="text" id="inputName" className="form-control" placeholder="Username" required="" autoFocus=""/>
+            <br/>
             <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autoFocus=""/>
-            <label htmlFor="inputPassword" className="sr-only">Password</label>
-            <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
-            <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <br/>
+            <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" autoFocus=""/>
+            <br/>
+            <input type="password" id="confirmPassword" className="form-control" placeholder="Confirm Password" required=""/>
+            <br/>
+            <button className="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+            <hr/>
+            <button className="btn btn-lg btn-primary btn-block active" onClick={() => navigate("/")} >To Sign-in</button>
             </form>
+            </div>
+            </div> 
+        )
+    };
+
+    
+    const SignIn = () => {
+        const navigate = useNavigate();
+        
+        const attemptSignIn = async (email, password) => {
+            fetch(`http://127.0.0.1:4000/login/${email}/${password}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    if(data.id === "failure"){
+                        //invalid login
+                    } else {
+                        user = data;
+                        navigate("/browse");
+                    }
+            });
+        };
+
+        return (
+            <div className="text-center d-flex align-items-center justify-content-center">
+            <div className="box w-25 h-50">
+            <div className="form-signin">
+            <h1 className="h3 mb-3 font-weight-normal">Challenge Champs Sign-in</h1>
+            <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autoFocus=""/>
+            <br/>
+            <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
+            <br/>
+            <div>
+            <button className="btn btn-lg btn-primary btn-block" 
+                onClick={ () => {
+                    let email = document.getElementById('inputEmail').value;
+                    let password = document.getElementById('inputPassword').value;
+                    if(email && password){
+                        attemptSignIn(email, password);
+                    } else {
+                        //notify that input is required
+                    }
+                }
+                } >
+                Sign in</button>
+            </div>
+            <hr/>
+            <button className="btn btn-lg btn-primary btn-block active" onClick={() => navigate("/signup")} >To Sign-up</button>
+            </div>
+            </div>
             </div>
         )
     };
   
   const Info = (
     <section>
-        <div id="navBar">{navBar}</div>
+        <div id="navBar">{< NavBar />}</div>
       <div
         className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary"
         style={{margin:'auto'}}
@@ -127,7 +192,7 @@ const App = () => {
     
       return (
     <div>
-        <div id="navBar">{navBar}</div>
+        <div id="navBar">{< NavBar />}</div>
           <div>
       <div
         className="position-relative overflow-hidden p-3 p-md-3 m-md-3 text-center bg-body-tertiary"
@@ -153,7 +218,7 @@ const App = () => {
     const {cid} = useParams();
     
     return (<div>
-        <div id="navBar">{navBar}</div>
+        <div id="navBar">{< NavBar />}</div>
       <h1 className="text-center mb-4"> {cid} Grace Challenge</h1>
       <p className="lead text-center">
         30 Clean and Jerk reps as fast as possible.
@@ -165,7 +230,7 @@ const App = () => {
 
   const Profile = (
     <div className="bg-body-tertiary">
-        <div id="navBar">{navBar}</div>
+        <div id="navBar">{< NavBar />}</div>
       <br />
       <br />
       <div
@@ -199,10 +264,11 @@ const App = () => {
     <div>
       <Router>
         <Routes>
-          <Route path="/info" element={<Info/>} />
+          <Route path="/info" element={Info} />
           <Route path="/browse" element={<Browse />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={Profile} />
           <Route path="/" element={< SignIn />} />
+          <Route path="/signup" element={< SignUp/>} />
           <Route path="/challenge/:cid" element={< Challenge />} />
         </Routes>
       </Router>
