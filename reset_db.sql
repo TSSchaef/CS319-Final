@@ -42,7 +42,7 @@ PRIMARY KEY (`id`)
 
 
 INSERT INTO `challenge_champs`.`users` (`id`, `name`, `email`, `password`, `bio`, `image`) 
-    VALUES (1, "Tyler", "tyler@gmail.com", "password", "ISU undergrad into tech and fitness!", "");
+    VALUES (1, "Tyler", "tyler@gmail.com", "password", "ISU undergrad into tech and fitness!", "https://github.com/TSSchaef/CS319-Final/blob/main/images/profile.png");
 
 INSERT INTO `challenge_champs`.`users` (`id`, `name`, `email`, `password`, `bio`, `image`) 
     VALUES (2, "Kaden", "kaden@gmail.com", "javascript", "Kaden's super unique bio...", "");

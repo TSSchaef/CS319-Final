@@ -28,13 +28,16 @@ const App = () => {
             navigate("/");  
             return ``;
         }
+        
+        let url = default_user;
+        if(user.image != "") url = user.image;
 
         return (
             <nav className="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
             <div className="container-fluid">
             <div className="dropdown">
             <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src={default_user} alt="" width="32" height="32" className="rounded-circle me-2"/>
+            <img src={url} alt="" width="32" height="32" className="rounded-circle me-2"/>
             <strong>{user.name} </strong>
             </a>
             <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
