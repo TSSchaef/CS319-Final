@@ -41,5 +41,11 @@ PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
+INSERT INTO `challenge_champs`.`users` (`id`, `name`, `email`, `password`, `bio`, `image`) 
+    VALUES (1, "Tyler", "tyler@gmail.com", "password", "ISU undergrad into tech and fitness!", "");
+
+INSERT INTO `challenge_champs`.`users` (`id`, `name`, `email`, `password`, `bio`, `image`) 
+    VALUES (2, "Kaden", "kaden@gmail.com", "javascript", "Kaden's super unique bio...", "");
+
 INSERT INTO `challenge_champs`.`challenges` (`cid`, `title`, `description`, `image`) 
     VALUES (1, "Grace Challenge", "30 Clean and Jerk reps to be completed as fast as possible", "https://github.com/TSSchaef/CS319-Midterm/blob/main/images/grace.png" );

@@ -28,6 +28,7 @@ const App = () => {
           </a>
           <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
             <li><a className="dropdown-item" href="/profile">Profile</a></li>
+            <li><a className="dropdown-item" href="/">Sign out</a></li>
           </ul>
         </div>
 
@@ -68,9 +69,27 @@ const App = () => {
       </div>
     </footer>
   );
+
+
+    const SignIn = () => {
+        
+        return (
+            <div>
+            <form className="form-signin">
+            <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <label htmlFor="inputEmail" className="sr-only">Email address</label>
+            <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autoFocus=""/>
+            <label htmlFor="inputPassword" className="sr-only">Password</label>
+            <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
+            <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+            </div>
+        )
+    };
   
   const Info = (
     <section>
+        <div id="navBar">{navBar}</div>
       <div
         className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary"
         style={{margin:'auto'}}
@@ -100,84 +119,93 @@ const App = () => {
         <div className="product-device shadow-sm d-none d-md-block"></div>
         <div className="product-device product-device-2 shadow-sm d-none d-md-block"></div>
       </div>
+        <div id="footer">{footer}</div>
     </section>
   );
 
-  const Browse = (
+  const Browse = () => {
+    
+      return (
     <div>
+        <div id="navBar">{navBar}</div>
+          <div>
       <div
-        class="position-relative overflow-hidden p-3 p-md-3 m-md-3 text-center bg-body-tertiary"
+        className="position-relative overflow-hidden p-3 p-md-3 m-md-3 text-center bg-body-tertiary"
         style={{margin:'auto'}}
       >
-        <div class="col-md-6 p-lg-2 mx-auto my-5">
-          <h1 class="display-3 fw-bold">Available Challenges</h1>
-          <h3 class="fw-normal text-muted mb-3">Find your next adventure!</h3>
+        <div className="col-md-6 p-lg-2 mx-auto my-5">
+          <h1 className="display-3 fw-bold">Available Challenges</h1>
+          <h3 className="fw-normal text-muted mb-3">Find your next adventure!</h3>
           <hr />
         </div>
       </div>
 
       <div
         id="container"
-        class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 g-3 bg-body-tertiary justify-content-center"
+        className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 g-3 bg-body-tertiary justify-content-center"
       ></div>
-    </div>
-  );
+          </div>
+        <div id="footer">{footer}</div>
+    </div>)
+  };
 
   const Challenge = () => {
     const {cid} = useParams();
     
     return (<div>
-      <h1 class="text-center mb-4"> {cid} Grace Challenge</h1>
-      <p class="lead text-center">
+        <div id="navBar">{navBar}</div>
+      <h1 className="text-center mb-4"> {cid} Grace Challenge</h1>
+      <p className="lead text-center">
         30 Clean and Jerk reps as fast as possible.
       </p>
       <div id="challenge-content"></div>
+        <div id="footer">{footer}</div>
     </div>)
   };
 
   const Profile = (
-    <div class="bg-body-tertiary">
+    <div className="bg-body-tertiary">
+        <div id="navBar">{navBar}</div>
       <br />
       <br />
       <div
         id="container1"
-        class="bg-body-tertiary justify-content-center"
+        className="bg-body-tertiary justify-content-center"
       ></div>
 
-      <div class="text-center bg-body-tertiary">
-        <h2 class="display-5">Recent Challenges</h2>
+      <div className="text-center bg-body-tertiary">
+        <h2 className="display-5">Recent Challenges</h2>
       </div>
 
       <div
         id="container2"
-        class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 g-3 bg-body-tertiary justify-content-center"
+        className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 g-3 bg-body-tertiary justify-content-center"
       ></div>
 
       <hr />
-      <div class="text-center bg-body-tertiary">
-        <h2 class="display-5">Achievements</h2>
+      <div className="text-center bg-body-tertiary">
+        <h2 className="display-5">Achievements</h2>
       </div>
 
       <div
         id="container3"
-        class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 g-3 bg-body-tertiary justify-content-center"
+        className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 g-3 bg-body-tertiary justify-content-center"
       ></div>
+        <div id="footer">{footer}</div>
     </div>
   );
 
   return (
     <div>
-      <div id="navBar">{navBar}</div>
       <Router>
         <Routes>
-          <Route path="/info" element={Info} />
-          <Route path="/browse" element={Browse} />
-          <Route path="/profile" element={Profile} />
+          <Route path="/info" element={<Info/>} />
+          <Route path="/browse" element={<Browse />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={< SignIn />} />
           <Route path="/challenge/:cid" element={< Challenge />} />
-          {/* Default view */}
         </Routes>
       </Router>
-      <div id="footer">{footer}</div>
     </div>
   );
 }

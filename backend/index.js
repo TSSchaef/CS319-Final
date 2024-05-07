@@ -1,3 +1,10 @@
+/*
+CS319 Final Project: Challenge Champs
+Authors: Tyler Schaefer and Tyler Vick
+5/1/24
+*/
+
+
 const express = require("express");
 const db = require("./db.js");
 const cors = require("cors");
